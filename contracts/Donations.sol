@@ -22,7 +22,7 @@ contract Donations {
         owner = msg.sender;
     }
 
-    function Donate() public payable {
+    function Donate() public payable returns (string memory) {
         address contributor = msg.sender;
 
         if (contributors.contains(contributor)) {
@@ -31,6 +31,8 @@ contract Donations {
         } else {
             contributors.set(contributor, msg.value);
         }
+
+        return 'Thanks a lot!';
     }
 
     function Withdraw(address payable target, uint256 amount) public onlyOwner {
