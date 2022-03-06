@@ -4,15 +4,16 @@ import { Donations } from '../typechain';
 export default task<{ contributor: string; amount: number }>(
   'donate',
   'Send funds',
-  async (taskArgs, hre) => {
-    const contributor = await hre.ethers.getSigner(taskArgs.contributor);
+  async ({ contributor, amount }, hre) => {
+    const signer = await hre.ethers.getSigner(contributor);
     const contract: Donations = await hre.ethers.getContractAt(
       'Donations',
       process.env.LOCAL_CONTRACT || '',
-      contributor
+      signer
     );
-    const tx = await contract.Donate({ value: taskArgs.amount });
-    return tx.wait();
+    const tx = await contract.Donate({ value: amount });
+    await tx.wait();
+    console.log(`${amount} Wei(s) received from ${contributor}`);
   }
 )
   .addParam('amount', 'Funds amount to donate')

@@ -5,7 +5,7 @@ module.exports = {
     mocha: true,
     node: true,
   },
-  plugins: ['@typescript-eslint', 'unused-imports'],
+  plugins: ['@typescript-eslint', 'import', 'unused-imports'],
   extends: [
     'standard',
     'plugin:prettier/recommended',
@@ -31,5 +31,19 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+    'import/no-unresolved': 'error',
+    'node/no-missing-import': 'off',
+    'node/no-unpublished-import': 'off',
+  },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+        project: './',
+      },
+    },
   },
 };

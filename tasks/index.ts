@@ -1,5 +1,5 @@
-export * from './contributors';
-export * from './donate';
-export * from './get-contributor-sum';
-export * from './get-donations-sum';
-export * from './withdraw';
+import './contributors';
+import './donate';
+import './get-contributor-sum';
+import './get-donations-sum';
+import './withdraw';
