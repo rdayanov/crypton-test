@@ -1,46 +1,29 @@
-# Advanced Sample Hardhat Project
+# Crypton test
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+## Project setup
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.ts
-TS_NODE_FILES=true npx ts-node scripts/deploy.ts
-npx eslint '**/*.{js,ts}'
-npx eslint '**/*.{js,ts}' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
+1. install deps
+```zsh
+yarn install
+touch .env
 ```
 
-# Etherscan verification
+2. fill .env file with the following variables
+  * `PRIVATE_KEY` - contract owner`s private key
+  * `RINKEBY_URL` - project url
+  * `CONTRIBUTOR_PRIVATE_KEY` - private key of wallet which will be used as contributor`s wallet in donate operation
+  * `CONTRACT_ADDRESS` - left empty for now
 
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
-
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
-
-```shell
-hardhat run --network ropsten scripts/deploy.ts
+3. deploy contract and save address from output to `CONTRACT_ADDRESS` .env variable
+```zsh
+yarn deploy
 ```
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
-
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
-```
-
-# Performance optimizations
-
-For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
+## Scripts
+* `yarn test:coverage` - run tests with coverage
+* `yarn deploy` - deploy contract to rinkeby network
+* `yarn donate --amount 2 --contributor 0xD09a1B6121642153ef89c85491e5185Dd4dE1f9D` - send funds to contract from specified address
+* `yarn contributors` - prints contributors list
+* `yarn getDonationsSum` - prints all donations sum
+* `yarn getContributorSum 0xD09a1B6121642153ef89c85491e5185Dd4dE1f9D` - prints specific contributor`s contributions sum
+* `yarn withdraw --amount 33 --address 0xfabb0ac9d68b0b445fb7357272ff202c5651694a` - withdraw specified amount of funds to target address
