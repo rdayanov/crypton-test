@@ -7,7 +7,7 @@ export default task(
   async (_, hre) => {
     const contract: Donations = await hre.ethers.getContractAt(
       'Donations',
-      process.env.LOCAL_CONTRACT || ''
+      process.env.CONTRACT_ADDRESS || ''
     );
     const donationsSum = await contract.GetDonationsSum();
     console.log(donationsSum.toNumber());

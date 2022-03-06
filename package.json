@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "npx hardhat test",
-    "lint:fix": "eslint \"./**/*.ts\" --fix"
+    "lint:fix": "eslint \"./**/*.ts\" --fix",
+    "deploy": "npx hardhat run scripts/deploy.ts",
+    "donate": "npx hardhat donate",
+    "contributors": "npx hardhat contributors",
+    "getContributorSum": "npx hardhat getContributorSum",
+    "getDonationsSum": "npx hardhat getDonationsSum",
+    "withdraw": "npx hardhat withdraw"
   },
   "author": "",
   "license": "ISC",

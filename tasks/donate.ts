@@ -8,7 +8,7 @@ export default task<{ contributor: string; amount: number }>(
     const signer = await hre.ethers.getSigner(contributor);
     const contract: Donations = await hre.ethers.getContractAt(
       'Donations',
-      process.env.LOCAL_CONTRACT || '',
+      process.env.CONTRACT_ADDRESS || '',
       signer
     );
     const tx = await contract.Donate({ value: amount });

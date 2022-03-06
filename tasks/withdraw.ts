@@ -7,7 +7,7 @@ export default task<{ amount: number; address: string }>(
   async ({ address, amount }, hre) => {
     const contract: Donations = await hre.ethers.getContractAt(
       'Donations',
-      process.env.LOCAL_CONTRACT || ''
+      process.env.CONTRACT_ADDRESS || ''
     );
 
     await contract.Withdraw(address, amount);
